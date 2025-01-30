@@ -88,3 +88,15 @@ function loadComments() {
         .then(response => response.json())
         .then(comments => {
             const container = document.getElementById("comments-container");
+            container.innerHTML = "";
+            comments.forEach(comment => {
+                const commentElement = document.createElement("p");
+                commentElement.textContent = comment;
+                container.appendChild(commentElement);
+            });
+        })
+        .catch(error => console.error('Error loading comments:', error));
+}
+
+loadPosts();
+loadComments();
