@@ -1,1 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Uploads</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="login-container">
+        <button id="login-btn">Admin Login</button>
+        <div id="login-form" class="hidden">
+            <input type="text" id="username" placeholder="Username">
+            <input type="password" id="password" placeholder="Password">
+            <button onclick="login()">Login</button>
+        </div>
+    </div>
 
+    <div id="upload-container" class="hidden">
+        <h2>Post Something</h2>
+        <textarea id="post-content" placeholder="What's on your mind?"></textarea>
+        <input type="file" id="file-upload">
+        <button onclick="uploadPost()">Post</button>
+    </div>
+
+    <div id="posts-container"></div>
+
+    <div id="comments-section">
+        <h3>Comments</h3>
+        <textarea id="comment-input" placeholder="Write a comment..."></textarea>
+        <button onclick="postComment()">Comment</button>
+        <div id="comments-container"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
