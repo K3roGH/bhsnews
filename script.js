@@ -23,7 +23,7 @@ function login() {
     }
 }
 
-// Upload post
+// Upload post function
 function uploadPost() {
     const content = document.getElementById("post-content").value;
     const file = document.getElementById("file-upload").files[0];
@@ -40,10 +40,13 @@ function uploadPost() {
     fetch("https://bhsnews-production.up.railway.app/upload", {
         method: "POST",
         body: formData
-    }).then(response => response.json()).then(data => {
+    })
+    .then(response => response.json())
+    .then(data => {
         alert(data.message);
         loadPosts();
-    });
+    })
+    .catch(error => console.error('Error uploading post:', error));
 }
 
 // Load posts
@@ -55,13 +58,16 @@ function loadPosts() {
             container.innerHTML = "";
             posts.forEach(post => {
                 const postElement = document.createElement("div");
-                postElement.innerHTML = `<p>${post.content}</p>`;
-                if (post.file) {
-                    postElement.innerHTML += `<img src="${post.file}" style="max-width:300px;">`;
-                }
+                postElement.classList.add("post");
+
+                postElement.innerHTML = `
+                    <p>${post.content}</p>
+                    ${post.file ? `<img src="${post.file}" style="max-width:300px;">` : ""}
+                `;
                 container.appendChild(postElement);
             });
-        });
+        })
+        .catch(error => console.error('Error loading posts:', error));
 }
 
 // Post a comment
@@ -71,7 +77,9 @@ function postComment() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ comment })
-    }).then(() => loadComments());
+    })
+    .then(() => loadComments())
+    .catch(error => console.error('Error posting comment:', error));
 }
 
 // Load comments
@@ -80,15 +88,3 @@ function loadComments() {
         .then(response => response.json())
         .then(comments => {
             const container = document.getElementById("comments-container");
-            container.innerHTML = "";
-            comments.forEach(comment => {
-                const commentElement = document.createElement("p");
-                commentElement.textContent = comment;
-                container.appendChild(commentElement);
-            });
-        });
-}
-
-loadPosts();
-loadComments();
-
