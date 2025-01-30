@@ -37,7 +37,7 @@ function uploadPost() {
     formData.append("content", content);
     if (file) formData.append("file", file);
 
-    fetch("/upload", {
+    fetch("https://bhsnews-production.up.railway.app/upload", {
         method: "POST",
         body: formData
     }).then(response => response.json()).then(data => {
@@ -48,7 +48,7 @@ function uploadPost() {
 
 // Load posts
 function loadPosts() {
-    fetch("/posts")
+    fetch("https://bhsnews-production.up.railway.app/posts")
         .then(response => response.json())
         .then(posts => {
             const container = document.getElementById("posts-container");
@@ -67,7 +67,7 @@ function loadPosts() {
 // Post a comment
 function postComment() {
     const comment = document.getElementById("comment-input").value;
-    fetch("/comment", {
+    fetch("https://bhsnews-production.up.railway.app/comment", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ comment })
@@ -76,7 +76,7 @@ function postComment() {
 
 // Load comments
 function loadComments() {
-    fetch("/comments")
+    fetch("https://bhsnews-production.up.railway.app/comments")
         .then(response => response.json())
         .then(comments => {
             const container = document.getElementById("comments-container");
